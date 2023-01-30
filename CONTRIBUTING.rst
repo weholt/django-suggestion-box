@@ -81,9 +81,8 @@ Ready to contribute? Here's how to set up `suggestion_box` for local development
 
     $ flake8 suggestion_box tests
     $ python setup.py test or pytest
-    $ tox
 
-   To get flake8 and tox, just pip install them into your virtualenv.
+   To get flake8, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub::
 
@@ -93,36 +92,3 @@ Ready to contribute? Here's how to set up `suggestion_box` for local development
 
 7. Submit a pull request through the GitHub website.
 
-Pull Request Guidelines
------------------------
-
-Before you submit a pull request, check that it meets these guidelines:
-
-1. The pull request should include tests.
-2. If the pull request adds functionality, the docs should be updated. Put
-   your new functionality into a function with a docstring, and add the
-   feature to the list in README.rst.
-3. The pull request should work for Python 3.5, 3.6, 3.7 and 3.8, and for PyPy. Check
-   https://travis-ci.com/weholt/suggestion_box/pull_requests
-   and make sure that the tests pass for all supported Python versions.
-
-Tips
-----
-
-To run a subset of tests::
-
-
-    $ python -m unittest tests.test_suggestion_box
-
-Deploying
----------
-
-A reminder for the maintainers on how to deploy.
-Make sure all your changes are committed (including an entry in HISTORY.rst).
-Then run::
-
-$ bump2version patch # possible: major / minor / patch
-$ git push
-$ git push --tags
-
-Travis will then deploy to PyPI if tests pass.
