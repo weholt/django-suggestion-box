@@ -1,0 +1,58 @@
+{% load humanize %}
+<div class="card mt-3 mb-3" id="suggestion-box-{{suggestion.uuid}}">
+    <div class="card-header">{{suggestion.title}}</div>
+    <div class="card-body">
+        <div class="text-muted fs-6">{% if suggestion.post_anonymous %}Someone{% else %}{{suggestion.creator|title}}{% endif %} wrote {{suggestion.created|naturaltime}}:</div>
+        <div class="mt-2 mb-4">{{suggestion.text}}</div>
+        {% if request.user == suggestion.creator and not suggestion.processed %}
+        <div hx-post="{% url 'suggestion-box:delete' suggestion.uuid %}"
+        hx-trigger="click"
+        hx-target="#suggestion-box-{{suggestion.uuid}}"
+        hx-swap="outerHTML"
+         class="btn btn-danger m-1 w-100">Delete suggestion</div>
+        {% endif %}
+        {% if request.user != suggestion.creator and suggestion.status == "pending" %}
+        <div class="row small">
+            <div class="col-6">
+                <div hx-post="{% url 'suggestion-box:up-vote' suggestion.uuid %}"
+                hx-trigger="click"
+                hx-target="#suggestion-box-{{suggestion.uuid}}"
+                hx-swap="outerHTML"
+                 class="btn btn-success w-100"><i class="fa-regular fa-thumbs-up"></i> Vote yes</div>
+            </div>
+            <div class="col-6">
+                <div hx-post="{% url 'suggestion-box:down-vote' suggestion.uuid %}"
+                hx-trigger="click"
+                hx-target="#suggestion-box-{{suggestion.uuid}}"
+                hx-swap="outerHTML"
+                class="btn btn-primary w-100"><i class="fa-regular fa-thumbs-down"></i> Vote no</div>
+            </div>
+        </div>
+        {% endif %}
+        {% if suggestion.processed %}
+        <hr>
+        <div class="mt-1 small">
+            {% if suggestion.notes %}
+            <p class="mb-3">{{suggestion.notes}}</p>
+            {% endif %}
+            <div class="">Processed {{suggestion.processed|naturaltime}} by {{suggestion.processed_by}}.</div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="card-footer small">
+        <div class="row">
+            <div class="col text-center">
+                Status:
+                <div class="">{{suggestion.status|title}}</div>
+            </div>
+            <div class="col text-center">
+                 <div class="">
+                    Vote status:
+                    {% if suggestion.vote_status > 0 %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
+                    {% if suggestion.vote_status < 0 %}<i class="fa-regular fa-thumbs-down"></i>{% endif %}
+                    &nbsp; {{suggestion.vote_balance}}
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

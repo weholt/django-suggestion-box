@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2 class="text-center p-2">Suggestion box</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="text-center mb-3 pb-3">
+            <input class="w-100  m-1 btn btn-primary btn-block" type="submit" value="Submit suggestion">
+            <a onclick="history.back();" class="w-100 m-1 btn btn-success btn-block">Go back</a>
+        </div>
+    </form>
+
+    <h2 class="text-center mt-3">Submitted suggestions</h2>
+    {% for suggestion in suggestions %}
+    {% include 'suggestion_box/suggestion_details.html' %}
+    {% empty %}
+    There are no suggestions available.
+    {% endfor %}
+{% endblock %}
