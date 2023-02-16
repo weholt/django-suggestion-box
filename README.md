@@ -2,6 +2,8 @@
 
 A reusable django app for managing suggestions from **authenticated users**, included up and down vote for suggestions.
 
+![Screenshot](./screenshot.png)
+
 ## Installation
 
 ```

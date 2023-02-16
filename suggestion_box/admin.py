@@ -6,7 +6,7 @@ from .models import Suggestion
 
 @admin.register(Suggestion)
 class SuggestionAdmin(admin.ModelAdmin):
-    list_display = ["title", "creator", "status", "processed"]
+    list_display = ["title", "creator", "status", "processed", "archived"]
     list_filter = ["status", "archived"]
     date_hierarchy = "created"
     readonly_fields = ["created"]
