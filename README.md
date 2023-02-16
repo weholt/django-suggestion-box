@@ -1,6 +1,6 @@
 # django-suggestion-box
 
-A reusable django app for managing suggestions from users, included up and down vote for suggestions.
+A reusable django app for managing suggestions from **authenticated users**, included up and down vote for suggestions.
 
 ## Installation
 
@@ -39,14 +39,10 @@ urlpatterns = [
 Since this app also uses htmx, add this to your template:
 ```
     <script src="//unpkg.com/htmx.org@1.1.0"></script>
-    {% block extra_script_import %}
-    {% endblock %}
     <script>
       document.body.addEventListener('htmx:configRequest', (event) => {
         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
       })
-      {% block extra_script %}
-      {% endblock %}
     </script>
 
 ```
