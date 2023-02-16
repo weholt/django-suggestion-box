@@ -15,7 +15,13 @@ INSTALLED_APPS = [
     ...
     "django.contrib.staticfiles",
     "suggestion_box",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 ```
 
 Add the sveve urls to your global urls.py:
