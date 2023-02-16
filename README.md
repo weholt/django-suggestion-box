@@ -32,9 +32,26 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     ...
-    path("suggestion-box", include("suggestion_box.urls"))
+    path("suggestion-box/", include("suggestion_box.urls"))
 ]
 ```
+
+Since this app also uses htmx, add this to your template:
+```
+    <script src="//unpkg.com/htmx.org@1.1.0"></script>
+    {% block extra_script_import %}
+    {% endblock %}
+    <script>
+      document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      })
+      {% block extra_script %}
+      {% endblock %}
+    </script>
+
+```
+
+For more information take a look at the example project included.
 
 ## Version history
 
